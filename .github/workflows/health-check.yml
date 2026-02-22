@@ -1,0 +1,21 @@
+name: Health Check
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check brain
+        run: |
+          STATUS=$(curl -sf -H 'X-Brain-Token: ${{ secrets.BRAIN_TOKEN }}'             https://theia.theiasystems.co.uk/brain/state)
+          echo "Brain: $(echo $STATUS | jq -r '.ok')"
+          echo "Emotion: $(echo $STATUS | jq -r '.current_emotion')"
+
+      - name: Check gateway
+        run: |
+          HTTP_CODE=$(curl -sf -o /dev/null -w '%{http_code}' https://gateway.theiasystems.co.uk/)
+          echo "Gateway: $HTTP_CODE"

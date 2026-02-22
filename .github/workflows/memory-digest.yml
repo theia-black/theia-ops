@@ -1,0 +1,14 @@
+name: Memory Digest
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Trigger memory digest
+        run: |
+          curl -sf -X POST https://theia.theiasystems.co.uk/brain/ingest             -H 'X-Brain-Token: ${{ secrets.BRAIN_TOKEN }}'             -H 'Content-Type: application/json'             -d '{"speaker":"system","text":"[memory-digest] Periodic digest triggered","channel":"github-actions"}'

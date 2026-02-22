@@ -1,0 +1,14 @@
+name: Embed Worker
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Process embedding queue
+        run: |
+          curl -sf -H 'X-Brain-Token: ${{ secrets.BRAIN_TOKEN }}'             'https://theia.theiasystems.co.uk/brain/context?channel=github-actions'
