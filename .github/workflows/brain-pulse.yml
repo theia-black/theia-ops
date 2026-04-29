@@ -1,14 +1,14 @@
-name: Brain Pulse
-on:
-  schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
+## name: Brain Pulse
+## on:
+  ##schedule:
+    ## - cron: '*/5 * * * *'
+  ## workflow_dispatch:
 
-jobs:
+## jobs:
   pulse:
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    steps:
-      - name: Heartbeat
-        run: |
-          curl -sf -X POST https://theia.theiasystems.co.uk/brain/ingest             -H 'X-Brain-Token: ${{ secrets.BRAIN_TOKEN }}'             -H 'Content-Type: application/json'             -d "{\"speaker\":\"system\",\"text\":\"[pulse] heartbeat $(date -u +%H:%M)\",\"channel\":\"github-actions\"}"
+  ##  runs-on: ubuntu-latest
+    ## timeout-minutes: 3
+    ##steps:
+    ##  - name: Heartbeat
+  ##      run: |
+##          curl -sf -X POST https://theia.theiasystems.co.uk/brain/ingest             -H 'X-Brain-Token: ${{ secrets.BRAIN_TOKEN }}'             -H 'Content-Type: application/json'             -d "{\"speaker\":\"system\",\"text\":\"[pulse] heartbeat $(date -u +%H:%M)\",\"channel\":\"github-actions\"}"
